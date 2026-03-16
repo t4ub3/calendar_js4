@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="full-height">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Kalender 2026</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="scripts/background.js" defer></script>
+  <script src="scripts/custom-tags.js" defer></script>
+  <script src="scripts/calendar.js" defer></script>
+  <script src="scripts/darkmode.js" defer></script>
+  <script src="scripts/holidays.js" defer></script>
+  <script src="scripts/api.js" defer></script>
+</head>
+
+<body class="full-height" id="holds-background" darkmode="on">
+  <div class="invisible"></div>
+  <div class="full-height">
+    <canvas id="background-canvas" class="background-canvas"></canvas>
+    <header class="header fixed">
+      <h1 class="header__title">Kalender 2026</h1>
+    </header>
+    <div class="main-layout" id="main-layout">
+      <custom-card title="Über den heutigen Tag">
+        <ul class="card__list">
+        <li>
+          Heute ist
+          <span name="current-weekday"></span>, der
+          <span id="full-date"></span></span>. Es ist der <span id="number-of-weekday"></span>.
+          <span name="current-weekday"></span> im Monat
+          <span id="current-month"></span>.
+        </li>
+          <li>
+            <span class="card__text--light" id="today-day-in-month">11</span>
+            ist <span id="prime-or-not"></span> Primzahl
+          </li>
+          <li>
+            Mehr als
+            <span class="card__text--light" id="now-ms-utc">5</span>ms sind
+            seit dem 01.01.1970 vergangen
+          </li>
+        </ul>
+      </custom-card>
+      <section class="card">
+        <h2 class="card__title" id="calendar-sheet-title">Februar 2026</h2>
+        <hr class="card__divider" />
+        <div class="cal-monthly">
+          <ul class="cal-monthly__header">
+            <li class="cal-monthly__week-nr">KW</li>
+            <li>Mo</li>
+            <li>Di</li>
+            <li>Mi</li>
+            <li>Do</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>So</li>
+          </ul>
+          <ol id="cal-sheet-cells" class="cal-monthly__day-grid">
+          </ol>
+        </div>
+      </section>
+      <custom-card title="Feiertage" id="holiday-card"> </custom-card>
+    </div>
+    <footer class="footer fixed">
+      <button id="theme-toggle" class="mode-toggle">
+        <span>
+          <img src="assets/icons/light_mode_24dp_F2C94C_FILL0_wght400_GRAD0_opsz24.svg" />
+          <img src="assets/icons/dark_mode_24dp_DCE1E5_FILL0_wght400_GRAD0_opsz24.svg" />
+        </span>
+      </button>
+      <div>© Jonas Neumann, cdemy GmbH, 2026</div>
+    </footer>
+  </div>
+</body>
+
+</html>

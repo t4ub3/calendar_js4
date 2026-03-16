@@ -1,0 +1,50 @@
+@import url(components.css);
+@import url(variables.css);
+@import url(animations.css);
+@import url(fonts.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'FunnelSans', sans-serif;
+    color: var(--on-background);
+}
+
+body {
+    background-color: var(--background);
+}
+
+.background-canvas {
+    position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.fixed {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+}
+
+.main-layout {
+    padding-top: calc(var(--header-height) + var(--flex-gap));
+    padding-bottom: calc(var(--footer-height) + var(--flex-gap));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--flex-gap);
+}
+
+.invisible {
+    display: none;
+}
+

@@ -1,0 +1,223 @@
+/* TOGGLE BUTTON */
+
+.mode-toggle {
+    padding: 3px;
+    width: 56px;
+
+    position: relative;
+    border-radius: 16px;
+    border: none;
+    background-color: var(--icon);
+    cursor: pointer;
+}
+
+.mode-toggle>span {
+    height: 28px;
+    width: 28px;
+
+    position: relative;
+    display: block;
+
+    border-radius: 50%;
+
+    background-color: var(--surface);
+}
+
+body[darkmode="on"] .mode-toggle>span {
+    left: 100%;
+    transform: translateX(-100%);
+}
+
+.mode-toggle>span>img {
+    height: 24px;
+    width: 24px;
+    fill: var(--icon);
+
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+body[darkmode="off"] .mode-toggle>span>img:nth-child(1) {
+    opacity: 1;
+}
+
+body[darkmode="off"] .mode-toggle>span>img:nth-child(2) {
+    opacity: 0;
+}
+
+body[darkmode="on"] .mode-toggle>span>img:nth-child(1) {
+    opacity: 0;
+}
+
+body[darkmode="on"] .mode-toggle>span>img:nth-child(2) {
+    opacity: 1;
+}
+
+/* CARD */
+
+custom-card {
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 var(--shadow);
+    background-color: var(--background);
+}
+
+custom-card dd {
+    padding-bottom: 8px;
+}
+custom-card dd:last-child {
+    padding-bottom: 0;
+}
+
+.card {
+    width: 80%;
+    max-width: 800px;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 var(--shadow);
+    background-color: var(--background);
+}
+
+.card__title {
+    font-weight: 400;
+    color: var(--secondary);
+}
+
+.card__divider {
+    border: none;
+    height: 1px;
+    background-color: var(--primary);
+    margin: 12px 8px;
+}
+
+.card__list {
+    list-style-type: none;
+}
+
+.card__list>li:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.card__text--light {
+    font-family: 'FunnelSans-Italic';
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* CALENDAR SHEET */
+
+.cal-monthly__header,
+.cal-monthly__day-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 4px;
+    margin: 0 auto;
+    max-width: 70%;
+    padding: 0;
+}
+
+.cal-monthly li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    transition: transform 0.2s, background-color 0.2s, border 0.5s, color 0.5s;
+}
+
+.cal-monthly__header li {
+    font-weight: 600;
+    aspect-ratio: 1.5;
+}
+
+.cal-monthly__day-grid li {
+    aspect-ratio: 1;
+    border: solid 1px var(--tertiary);
+    border-radius: 4px;
+}
+
+.cal-monthly__week-nr {
+    color: var(--primary);
+    border: none !important;
+}
+
+.cal-monthly__day {
+    color: var(--tertiary-container);
+    border-color: var(--tertiary-container) !important;
+}
+
+.cal-monthly__weekend {
+    background-color: var(--tertiary-container);
+}
+
+.cal-monthly__day--today {
+    color: var(--secondary);
+    font-weight: 600;
+    background-color: var(--tertiary);
+}
+
+.cal-monthly__day--prev-month,
+.cal-monthly__day--next-month {
+    color: var(--tertiary-container);
+    border-color: var(--tertiary-container) !important;
+}
+
+.cal-monthly__day--current-month:hover {
+    border: solid 1px var(--primary);
+    color: var(--primary);
+    transform: scale(1.05);
+    background-color: var(--background);
+}
+
+.cal-monthly__day--weekend {
+    background-color: var(--tertiary-container);
+}
+
+.cal-monthly__day--prev-month.cal-monthly__day--weekend,
+.cal-monthly__day--next-month.cal-monthly__day--weekend {
+    color: var(--background);
+    border-color: var(--surface-variant) !important;
+}
+
+/* HOLIDAYS */
+.holiday__item {
+    list-style: none;
+}
+
+.holiday__date {
+    color: var(--primary);
+}
+
+/* HEADER AND FOOTER */
+
+.header {
+    top: 0;
+    height: var(--header-height);
+    background-image: linear-gradient(130deg, var(--primary-container), var(--tertiary-container), var(--primary-container), var(--tertiary-container));
+    background-size: 400% 400%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px -5px 5px 5px black;
+    animation: gradientMove 20s infinite;
+}
+
+.header__title {
+    font-family: 'PoiretOne', 'FunnelSans', sans-serif;
+}
+
+.footer {
+    bottom: 0;
+    height: var(--footer-height);
+    background: var(--secondary-container);
+    font-family: 'FunnelSans-Italic', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    color: var(--on-secondary-container);
+    box-shadow: 0px 5px 5px 5px black;
+}

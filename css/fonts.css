@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'FunnelSans-Italic';
+    src: url('../fonts/FunnelSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FunnelSans';
+    src: url('../fonts/FunnelSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PoiretOne';
+    src: url('../fonts/PoiretOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
