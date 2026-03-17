@@ -135,7 +135,6 @@ custom-card dd:last-child {
 
 .cal-monthly__day-grid li {
     aspect-ratio: 1;
-    border: solid 1px var(--tertiary);
     border-radius: 4px;
 }
 
@@ -144,19 +143,18 @@ custom-card dd:last-child {
     border: none !important;
 }
 
-.cal-monthly__day {
-    color: var(--tertiary-container);
-    border-color: var(--tertiary-container) !important;
-}
-
 .cal-monthly__weekend {
     background-color: var(--tertiary-container);
 }
 
-.cal-monthly__day--today {
+.cal-monthly__day--current-month.cal-monthly__day--today {
     color: var(--secondary);
+    border-color: var(--primary);
     font-weight: 600;
-    background-color: var(--tertiary);
+}
+
+.cal-monthly__day--current-month.cal-monthly__day--selected {
+    border-width: 2px;
 }
 
 .cal-monthly__day--prev-month,
@@ -165,11 +163,14 @@ custom-card dd:last-child {
     border-color: var(--tertiary-container) !important;
 }
 
+.cal-monthly__day--current-month {
+    border: solid 1px var(--tertiary);
+}
+
 .cal-monthly__day--current-month:hover {
-    border: solid 1px var(--primary);
     color: var(--primary);
     transform: scale(1.05);
-    background-color: var(--background);
+    background-color: var(--tertiary);
 }
 
 .cal-monthly__day--weekend {

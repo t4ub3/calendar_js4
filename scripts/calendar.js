@@ -1,12 +1,3 @@
-/**
- * @fileoverview provides basic functionality to the calendar
- * @author Jonas Neumann
- * @version 0.0.1
- * @date 2026-02-23
- * 
- * @license MIT
- */
-
 
 // get all the needed html elements
 const elements = {
@@ -30,13 +21,15 @@ let lastOfPreviousMonth;
 let firstOfNextMonth;
 let lastOfCurrentMonth;
 
+let currentMonthElements = [];
+
 const calendarCells = new Array(48).fill(1);
 
-function setBasicDataForSheet() {
-    firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+function setBasicDataForSheet(date) {
+    firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     firstMonday = calcfirstMonday();
     lastOfPreviousMonth = new Date(firstOfMonth.valueOf() - 86400000);
-    firstOfNextMonth = (today.getMonth() === 11) ? new Date(today.getFullYear() + 1, 1, 1) : new Date(today.getFullYear(), today.getMonth() + 1, 1);
+    firstOfNextMonth = (date.getMonth() === 11) ? new Date(date.getFullYear() + 1, 1, 1) : new Date(date.getFullYear(), date.getMonth() + 1, 1);
     lastOfCurrentMonth = new Date(firstOfNextMonth.valueOf() - 86400000);
 }
 
@@ -56,26 +49,37 @@ function getWeekNr(date) {
 }
 
 // adjust displayed data to match today
-function setToday() {
-    elements.nowMsUtc.innerHTML = today.getTime().toString();
-    elements.todayDayInMonth.innerHTML = today.getDate().toString();
-    elements.primeOrNot.innerHTML = isPrime(today.getDate()) ? "eine" : "keine";
+function setCurrentDay(date) {
+    //console.log(date);
+    if (!isValidDate(date)) {
+        throw new Error("not a valid date");
+    }
+    selectedDate = date;
+    elements.nowMsUtc.innerHTML = date.getTime().toString();
+    elements.todayDayInMonth.innerHTML = date.getDate().toString();
+    elements.primeOrNot.innerHTML = isPrime(date.getDate()) ? "eine" : "keine";
     elements.listCurrentWeekdays.forEach((item) => {
-        item.innerHTML = today.toLocaleString('de-de', { weekday: 'long' });
+        item.innerHTML = date.toLocaleString('de-de', { weekday: 'long' });
     })
-    elements.fullDate.innerHTML = today.toLocaleString('de-de', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    elements.currentMonth.innerHTML = today.toLocaleString('de-de', { month: 'long' });
-    elements.numberOfWeekday.innerHTML = (Math.floor(today.getDate() / 7) + 1).toString();
-    elements.calendarSheetTitle.innerText = today.toLocaleString('de-de', { month: 'long', year: 'numeric' });
+    elements.fullDate.innerHTML = date.toLocaleString('de-de', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    elements.currentMonth.innerHTML = date.toLocaleString('de-de', { month: 'long' });
+    elements.numberOfWeekday.innerHTML = (Math.floor(date.getDate() / 7) + 1).toString();
+    elements.calendarSheetTitle.innerText = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
 
-    setupCalendarSheet();
+    setupCalendarSheet(date);
 }
 
 function setDay(date) {
     if (!isValidDate(date)) {
         throw new Error("not a valid date");
     }
+}
 
+function setCalendarDay(el) {
+    let dayNr = el.innerText;
+    let date = new Date(`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${dayNr}`);
+    console.log(date);
+    //setCurrentDay(date);
 }
 
 function isValidDate(value) {
@@ -86,11 +90,12 @@ function isPrime(dateNumber) {
     return (dateNumber in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]);
 }
 
-function setupCalendarSheet() {
+function setupCalendarSheet(date) {
+    if(elements.calendarSheetCells) {
+        elements.calendarSheetCells.replaceChildren();
+    }
 
-
-
-    setBasicDataForSheet();
+    setBasicDataForSheet(date);
 
     let totalCount = 0;
     let weekCount = getWeekNr(firstMonday);
@@ -139,10 +144,23 @@ function setupCalendarSheet() {
             if (i === today.getDate()) {
                 el.classList.add('cal-monthly__day--today');
             }
+            if(i === selectedDate.getDate()) {
+                el.classList.add('cal-monthly__day--selected');
+            }
+            el.addEventListener("click", function () {
+                let date = new Date(`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${this.innerText}`);
+                console.log(date);
+                setCurrentDay(date);
+            });
             elements.calendarSheetCells.appendChild(el);
+            currentMonthElements.push(el);
             totalCount++;
         }
     }
+
+    currentMonthElements.forEach(el => {
+        //addClickListener(el);
+    })
 
     // next month
     for (i = 1; totalCount < calendarCells.length; i++) {
@@ -172,4 +190,4 @@ function setupCalendarSheet() {
 const today = new Date(Date.now());
 selectedDate = today;
 
-setToday();
+setCurrentDay(selectedDate);
