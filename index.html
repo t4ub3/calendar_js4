@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <title>Kalender 2026</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="scripts/utils/date-utils.js" defer></script>
     <script src="scripts/background.js" defer></script>
-    <script src="scripts/custom-tags.js" defer></script>
-    <script src="scripts/calendar.js" defer></script>
+    <script src="scripts/custom-tags/custom-card.js" defer></script>
     <script src="scripts/darkmode.js" defer></script>
     <script src="scripts/holidays.js" defer></script>
-    <script src="scripts/api.js" defer></script>
+    <script src="scripts/events-api.js" defer></script>
+    <script src="scripts/calendar.js" defer></script>
   </head>
 
   <body class="full-height" id="holds-background" darkmode="on">
@@ -20,7 +21,9 @@
         <h1 class="header__title">Kalender 2026</h1>
       </header>
       <div class="main-layout" id="main-layout">
-        <custom-card title="Über den heutigen Tag">
+        <button id="btn-prev-month">previous Month</button>
+        <button id="btn-next-month">next Month</button>
+        <custom-card card-title="Über den heutigen Tag">
           <ul class="card__list">
             <li>
               Heute ist
@@ -42,7 +45,7 @@
             </li>
           </ul>
         </custom-card>
-        <custom-card title="Februar 2026" id="calendar-sheet">
+        <custom-card card-title="" id="calendar-sheet">
           <div class="cal-monthly">
             <ul class="cal-monthly__header">
               <li class="cal-monthly__week-nr">KW</li>
@@ -57,7 +60,18 @@
             <ol id="cal-sheet-cells" class="cal-monthly__day-grid"></ol>
           </div>
         </custom-card>
-        <custom-card title="Feiertage" id="holiday-card"> </custom-card>
+        <custom-card card-title="Historische Ereignisse" id="events-historic">
+            <div id="events-historic-content"></div>
+        </custom-card>
+        <custom-card card-title="Geburtstage" id="events-births">
+            <div id="events-birthdays-content"></div>
+        </custom-card>
+        <custom-card card-title="Todestage" id="events-deaths">
+            <div id="events-deaths-content"></div>
+        </custom-card>
+        <custom-card card-title="Feiertage" id="holiday-card">
+            <div id="holiday-card-content"></div>
+        </custom-card>
       </div>
       <footer class="footer fixed">
         <button id="theme-toggle" class="mode-toggle">

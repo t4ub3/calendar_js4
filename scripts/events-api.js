@@ -1,10 +1,14 @@
 const API_BASE_URL = "https://history.muffinlabs.com/date";
 
-//const historicCard = document.getElementById('historic-card');
+const eventsWrapper = document.getElementById("events-wrapper");
 
-function loadHistoricEvents() {
-    const url = buildUrl("");
-    let data = fetchHistoricEvents(url);
+function loadHistoricEvents(date) {
+    if (!isValidDate(date)) {
+        throw new Error("not a valid date");
+    }
+    const url = buildUrl(date);
+    console.log(url);
+    fetchHistoricEvents(url);
 }
 
 
@@ -30,7 +34,7 @@ function buildUrl(date) {
     if (!isValidDate(date)) {
         return `${API_BASE_URL}/1/1`;
     }
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     return `${API_BASE_URL}/${month}/${day}`;
 }
@@ -44,15 +48,14 @@ function displayData(data) {
     let events = pickRandom(5, data.data.Events);
     let birthdays = pickRandom(5, data.data.Births);
     let deaths = pickRandom(5, data.data.Deaths);
-    renderCard("Historische Ereignisse", events);
-    renderCard("Todestage", deaths);
-    renderCard("Geburtstage", birthdays);
+    renderCard("events-historic-content", events);
+    renderCard("events-deaths-content", deaths);
+    renderCard("events-birthdays-content", birthdays);
 }
 
 //renders a card at the end of the website
-function renderCard(name, data) {
-    let card = document.createElement("custom-card");
-    card.title = name;
+function renderCard(elementId, data) {
+    let cardContent = document.getElementById(elementId);
 
     let list = document.createElement("dl");
     data.forEach(el => {
@@ -64,14 +67,9 @@ function renderCard(name, data) {
         text.innerHTML = el.text;
         list.appendChild(text);
     });
-    card.appendChild(list);
-    const mainLayout = document.getElementById("main-layout");
-    const referenceNode = mainLayout.children[2];
-    if (referenceNode) {
-        mainLayout.insertBefore(card, referenceNode);
-    } else {
-        mainLayout.appendChild(card);
-    }
+    
+    cardContent.replaceChildren(list);
+    // cardContent.appendChild(list);
 }
 
 // select n random elements from a list 
@@ -90,4 +88,4 @@ function pickRandom(amount, list) {
     return shuffled.slice(0, amount);
 }
 
-loadHistoricEvents();
+// loadHistoricEvents();

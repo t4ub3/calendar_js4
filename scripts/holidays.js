@@ -1,5 +1,5 @@
 
-// Alle deutschen Feiertage für 2026, 2027, 2028 (von https://www.api-feiertage.de/)
+// all german holidays for 2026, 2027, 2028 (von https://www.api-feiertage.de/)
 const holidays = [
     {
         "date": "2026-01-01",
@@ -843,43 +843,50 @@ const holidays = [
     }
 ];
 
-// Sucht nur Feiertage des aktuellen Monats
-function filterCurrentHolidays() {
+function loadHolidays(date) {
+    if (!isValidDate(date)) {
+        throw new Error("not a valid date");
+    }
+
+    let currentHolidays = filterCurrentHolidays(date);
+
+    // create a list entry for each holiday
+    const holidayCardContent = document.getElementById("holiday-card-content");
+
+    holidayCardContent.replaceChildren();
+
+    if (currentHolidays.length !== 0) {
+        currentHolidays.forEach((holiday) => {
+            let item = document.createElement("p");
+            item.classList.add('holiday__item');
+            holidayCardContent.appendChild(item);
+
+            let dateString = document.createElement("span");
+            dateString.classList.add('holiday__date');
+            dateString.innerText = holiday.date;
+
+            let nameString = document.createElement("span");
+            nameString.innerText = " - " + holiday.fname;
+            item.appendChild(dateString);
+            item.appendChild(nameString);
+        })
+    } else {
+        let placeholder = document.createElement("p");
+        placeholder.innerText = "Diesen Monat gibt es keine Feiertage.";
+        holidayCard.appendChild(placeholder);
+    }
+}
+
+// filter for holidays from the given dates month
+function filterCurrentHolidays(date) {
     let currentHolidays = [];
-    let now = new Date();
     holidays.forEach((holiday) => {
         let holidayDate = new Date(holiday.date);
-        if (holidayDate.getFullYear() === now.getFullYear() && holidayDate.getMonth() === now.getMonth()) {
+        if (holidayDate.getFullYear() === date.getFullYear() && holidayDate.getMonth() === date.getMonth()) {
             currentHolidays.push(holiday);
         }
     })
     return currentHolidays;
-}
-
-let currentHolidays = filterCurrentHolidays();
-
-// Erstelle einen Listeneintrag für jeden Feiertag diesen Monat
-const holidayCard = document.getElementById("holiday-card");
-
-if (currentHolidays.length !== 0) {
-    currentHolidays.forEach((holiday) => {
-        let item = document.createElement("p");
-        item.classList.add('holiday__item');
-        holidayCard.appendChild(item);
-        
-        let dateString = document.createElement("span");
-        dateString.classList.add('holiday__date');
-        dateString.innerText = holiday.date;
-
-        let nameString = document.createElement("span");
-        nameString.innerText = " - " + holiday.fname;
-        item.appendChild(dateString);
-        item.appendChild(nameString);
-    })
-} else {
-    let placeholder = document.createElement("p");
-    placeholder.innerText = "Diesen Monat gibt es keine Feiertage.";
-    holidayCard.appendChild(placeholder);
 }
 
 
