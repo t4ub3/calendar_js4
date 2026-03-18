@@ -10,7 +10,8 @@ const elements = {
     primeOrNot: document.getElementById("prime-or-not"),
     fullDate: document.getElementById("full-date"),
     body: document.getElementById("holds-background"),
-    calendarSheetTitle: document.getElementById("calendar-sheet-title"),
+    //calendarSheetTitle: document.getElementById("calendar-sheet-title"),
+    calendarSheet: document.getElementById("calendar-sheet"),
     calendarSheetCells: document.getElementById("cal-sheet-cells")
 }
 let selectedDate;
@@ -64,7 +65,8 @@ function setCurrentDay(date) {
     elements.fullDate.innerHTML = date.toLocaleString('de-de', { year: 'numeric', month: '2-digit', day: '2-digit' });
     elements.currentMonth.innerHTML = date.toLocaleString('de-de', { month: 'long' });
     elements.numberOfWeekday.innerHTML = (Math.floor(date.getDate() / 7) + 1).toString();
-    elements.calendarSheetTitle.innerText = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
+    //elements.calendarSheetTitle.innerText = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
+    elements.calendarSheet.title = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
 
     setupCalendarSheet(date);
 }
@@ -79,7 +81,7 @@ function setCalendarDay(el) {
     let dayNr = el.innerText;
     let date = new Date(`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${dayNr}`);
     console.log(date);
-    //setCurrentDay(date);
+    setCurrentDay(date);
 }
 
 function isValidDate(value) {
@@ -91,8 +93,9 @@ function isPrime(dateNumber) {
 }
 
 function setupCalendarSheet(date) {
+    selectedDate = date;
     if(elements.calendarSheetCells) {
-        elements.calendarSheetCells.replaceChildren();
+        elements.calendarSheetCells.replaceChildren(); // = delete all children
     }
 
     setBasicDataForSheet(date);
@@ -148,19 +151,17 @@ function setupCalendarSheet(date) {
                 el.classList.add('cal-monthly__day--selected');
             }
             el.addEventListener("click", function () {
-                let date = new Date(`${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${this.innerText}`);
+                console.log("old: " + selectedDate);
+                let date = new Date(`${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${this.innerText}`);
                 console.log(date);
-                setCurrentDay(date);
+                setupCalendarSheet(date);
+                console.log("new: " + selectedDate);
             });
             elements.calendarSheetCells.appendChild(el);
             currentMonthElements.push(el);
             totalCount++;
         }
     }
-
-    currentMonthElements.forEach(el => {
-        //addClickListener(el);
-    })
 
     // next month
     for (i = 1; totalCount < calendarCells.length; i++) {

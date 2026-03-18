@@ -87,6 +87,19 @@ custom-card dd:last-child {
     color: var(--secondary);
 }
 
+.card__title-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__title-placeholder {
+    height: 20px;
+    width: 20px;
+    background-color: aqua;
+}
+
 .card__divider {
     border: none;
     height: 1px;
@@ -148,13 +161,14 @@ custom-card dd:last-child {
 }
 
 .cal-monthly__day--current-month.cal-monthly__day--today {
-    color: var(--secondary);
-    border-color: var(--primary);
-    font-weight: 600;
+    background-color: var(--tertiary);
 }
 
 .cal-monthly__day--current-month.cal-monthly__day--selected {
     border-width: 2px;
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600;
 }
 
 .cal-monthly__day--prev-month,

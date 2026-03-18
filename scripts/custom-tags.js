@@ -9,10 +9,15 @@ class CustomCard extends HTMLElement {
         const title = this.getAttribute("title");
         // Create elements safely
         const section = document.createElement("section");
+        const titleWrapper = document.createElement("div");
+        titleWrapper.className = "card__title-wrapper";
 
         const h2 = document.createElement("h2");
         h2.className = "card__title";
         h2.textContent = title;
+
+        const placeholder = document.createElement("div");
+        placeholder.className = "card__title-placeholder";
 
         const hr = document.createElement("hr");
         hr.className = "card__divider";
@@ -23,8 +28,8 @@ class CustomCard extends HTMLElement {
         while (this.firstChild) {
             contentWrapper.appendChild(this.firstChild);
         }
-
-        section.append(h2, hr, contentWrapper);
+        titleWrapper.append(h2, placeholder);
+        section.append(titleWrapper, hr, contentWrapper);
         this.appendChild(section);
     }
 
