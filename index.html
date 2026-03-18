@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Kalender 2026</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="scripts/utils/date-utils.js" defer></script>
     <script src="scripts/background.js" defer></script>
     <script src="scripts/custom-tags/custom-card.js" defer></script>
@@ -11,6 +11,7 @@
     <script src="scripts/holidays.js" defer></script>
     <script src="scripts/events-api.js" defer></script>
     <script src="scripts/calendar.js" defer></script>
+    <script src="main.js" defer></script>
   </head>
 
   <body class="full-height" id="holds-background" darkmode="on">
@@ -20,7 +21,7 @@
       <header class="header fixed">
         <h1 class="header__title">Kalender 2026</h1>
       </header>
-      <div class="main-layout" id="main-layout">
+      <div class="main-layout">
         <button id="btn-prev-month">previous Month</button>
         <button id="btn-next-month">next Month</button>
         <custom-card card-title="Über den heutigen Tag">

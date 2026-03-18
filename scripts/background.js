@@ -30,6 +30,12 @@ ctx.scale(dpr, dpr);
 let currentGrid = Array.from({ length: columns }, () => new Array(rows));
 let nextGrid = Array.from({ length: columns }, () => new Array(rows));
 
+function drawBackground() {
+    initGrid();
+    computeNextGrid();
+    requestAnimationFrame(loop);
+}
+
 function initGrid() {
     for (let i = 0; i < currentGrid.length; i++) {
         for (let j = 0; j < currentGrid[i].length; j++) {
@@ -151,7 +157,5 @@ function isValidSixDigitHex(hexString) {
     return hexRegex.test(hexString);
 }
 
-initGrid();
-computeNextGrid();
-requestAnimationFrame(loop);
+
 

@@ -1,0 +1,2 @@
+initCalendar();
+drawBackground();

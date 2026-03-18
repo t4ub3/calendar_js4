@@ -27,6 +27,11 @@ let lastOfCurrentMonth;
 
 let currentMonthElements = [];
 
+function initCalendar() {
+    drawCalendarSheet(today);
+    selectDay(today);
+}
+
 function selectDay(date) {
     selectedDate = date;
     loadHistoricEvents(date);
@@ -163,5 +168,3 @@ function setHtmlElementsData(date) {
     elements.calendarSheet.cardTitle = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
 }
 
-drawCalendarSheet(today);
-selectDay(today);
