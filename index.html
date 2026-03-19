@@ -22,14 +22,16 @@
         <h1 class="header__title">Kalender 2026</h1>
       </header>
       <div class="main-layout">
-        <custom-card card-title="Über den heutigen Tag" id="card-about-today">
+        <custom-card card-title="Über den gewählten Tag" id="card-about-today">
           <ul class="card__list">
             <li>
-              Heute ist
-              <span
-                ><span name="current-weekday"></span>, der
-                <span id="full-date"></span></span
-              >. Es ist der <span id="number-of-weekday"></span>.
+              Es ist
+              <span class="card__text--light">
+                <span name="current-weekday" class="card__text--light"></span>,
+                der
+                <span id="full-date" class="card__text--light"></span>
+              </span>
+              . Das ist der <span id="number-of-weekday"></span>.
               <span name="current-weekday"></span> im Monat
               <span id="current-month"></span>.
             </li>
@@ -59,17 +61,17 @@
             <ol id="cal-sheet-cells" class="cal-monthly__day-grid"></ol>
           </div>
         </custom-card>
+        <custom-card card-title="Feiertage" id="holiday-card">
+          <div id="holiday-card-content"></div>
+        </custom-card>
         <custom-card card-title="Historische Ereignisse" id="events-historic">
-            <div id="events-historic-content"></div>
+          <div id="events-historic-content"></div>
         </custom-card>
         <custom-card card-title="Geburtstage" id="events-births">
-            <div id="events-birthdays-content"></div>
+          <div id="events-birthdays-content"></div>
         </custom-card>
         <custom-card card-title="Todestage" id="events-deaths">
-            <div id="events-deaths-content"></div>
-        </custom-card>
-        <custom-card card-title="Feiertage" id="holiday-card">
-            <div id="holiday-card-content"></div>
+          <div id="events-deaths-content"></div>
         </custom-card>
       </div>
       <footer class="footer fixed">

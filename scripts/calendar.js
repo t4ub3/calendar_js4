@@ -19,6 +19,7 @@ const elements = {
 
 const calendarCells = new Array(48).fill(1);
 const today = new Date(Date.now());
+
 let selectedDate = today;
 let firstOfShownMonth = getFirstOfMonth(today);
 
@@ -26,7 +27,6 @@ let firstMonday;
 let lastOfPreviousMonth;
 let firstOfNextMonth;
 let lastOfCurrentMonth;
-
 let currentMonthElements = [];
 
 function initCalendar() {
@@ -160,6 +160,7 @@ function setupActionButtons() {
     }
     btnTodayWithIcon.onclick = function () {
         drawCalendarSheet(today);
+        selectDay(today);
     }
 
     buttons.append(btnPrevWithIcon, btnTodayWithIcon, btnNextWithIcon);

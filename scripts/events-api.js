@@ -44,7 +44,7 @@ function isValidDate(value) {
 
 // filters the data and renders it on the website
 function displayData(data) {
-    let events = pickRandom(5, data.data.Events);
+    let events = pickRandom(3, data.data.Events);
     let birthdays = pickRandom(5, data.data.Births);
     let deaths = pickRandom(5, data.data.Deaths);
     renderCard("events-historic-content", events);

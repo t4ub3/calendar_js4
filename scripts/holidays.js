@@ -873,7 +873,7 @@ function loadHolidays(date) {
     } else {
         let placeholder = document.createElement("p");
         placeholder.innerText = "Diesen Monat gibt es keine Feiertage.";
-        holidayCard.appendChild(placeholder);
+        holidayCardContent.appendChild(placeholder);
     }
 }
 
