@@ -11,8 +11,8 @@ const canvas = document.getElementById("background-canvas");
 const width = window.innerWidth;
 const height = window.innerHeight;
 const ctx = canvas.getContext("2d");
-const cellSize = Math.round(width / columns);
-const rows = Math.round(height / cellSize);
+let cellSize = Math.round(width / columns);
+let rows = Math.round(height / cellSize);
 
 const generationDelay = 2000;
 const animationDuration = 1500;
@@ -29,6 +29,37 @@ ctx.scale(dpr, dpr);
 
 let currentGrid = Array.from({ length: columns }, () => new Array(rows));
 let nextGrid = Array.from({ length: columns }, () => new Array(rows));
+
+let resizeTimeout;
+
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+    }, 150);
+});
+
+function resizeCanvas() {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+
+    canvas.width = newWidth * dpr;
+    canvas.height = newHeight * dpr;
+    canvas.style.width = newWidth + "px";
+    canvas.style.height = newHeight + "px";
+    ctx.scale(dpr, dpr);
+
+    // Recalculate grid dimensions
+    cellSize = Math.round(newWidth / columns);
+    rows = Math.round(newHeight / cellSize);
+
+    // Reinitialize grids with new dimensions
+    currentGrid = Array.from({ length: columns }, () => new Array(rows));
+    nextGrid = Array.from({ length: columns }, () => new Array(rows));
+
+    initGrid();
+    computeNextGrid();
+}
 
 function drawBackground() {
     initGrid();
