@@ -7,7 +7,6 @@ function loadHistoricEvents(date) {
         throw new Error("not a valid date");
     }
     const url = buildUrl(date);
-    console.log(url);
     fetchHistoricEvents(url);
 }
 

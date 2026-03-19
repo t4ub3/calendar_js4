@@ -17,8 +17,10 @@ class CustomCard extends HTMLElement {
 
         this._elements.title = h2;
 
-        const placeholder = document.createElement("div");
-        placeholder.className = "card__title-placeholder";
+        const actions = document.createElement("div");
+        actions.className = "card__title-actions";
+
+        this._elements.actions = actions;
 
         const hr = document.createElement("hr");
         hr.className = "card__divider";
@@ -29,9 +31,14 @@ class CustomCard extends HTMLElement {
             contentWrapper.appendChild(this.firstChild);
         }
 
-        titleWrapper.append(h2, placeholder);
+        titleWrapper.append(h2, actions);
         section.append(titleWrapper, hr, contentWrapper);
         this.appendChild(section);
+    }
+
+    setActionsContent(...elements) {
+        if (!this._elements.actions) return;
+        this._elements.actions.replaceChildren(...elements);
     }
 
     static get observedAttributes() { return ["card-title"]; }

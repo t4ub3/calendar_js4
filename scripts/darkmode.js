@@ -28,3 +28,27 @@ modeToggle.addEventListener("click", function () {
     darkmode = (darkmode === "on") ? "off" : "on";
     setDarkMode(darkmode);
 })
+
+/* TODO: expand to settings
+    - theme
+    - animation speed
+    - background cell size
+*/
+
+// const theme = Object.freeze({
+//     LIGHT: "LIGHT",
+//     AUTO: "AUTO",
+//     DARK: "DARK"
+// })
+
+// const animationSpeed = Object.freeze({
+//     SLOW: "SLOW",
+//     MEDIUM: "MEDIUM",
+//     FAST: "FAST"
+// })
+
+// const cellSize = Object.freeze({
+//     SMALL: "SMALL",
+//     MEDIUM: "MEDIUM",
+//     BIG: "BIG"
+// })

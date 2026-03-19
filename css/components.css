@@ -94,10 +94,37 @@ custom-card dd:last-child {
     align-items: center;
 }
 
-.card__title-placeholder {
-    height: 20px;
-    width: 20px;
-    background-color: aqua;
+.card__title-actions {
+}
+
+.card__button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.card__button {
+    background: none;
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    transition: background-color 0.5s;
+}
+.card__button:hover {
+    background-color: var(--on-surface-variant);
+}
+
+.card__button-icon {
+    display: block;
+    height: 24px;
+    width: 24px;
+    fill: var(--on-surface);
+    transition: transform 0.5s, fill 0.5s;
+}
+
+.card__button:hover .card__button-icon {
+    fill: var(--surface-variant);
+    transform: scale(1.2);
 }
 
 .card__divider {
