@@ -14,12 +14,7 @@ const elements = {
     fullDate: document.getElementById("full-date"),
     body: document.getElementById("holds-background"),
     cardCalendarSheet: document.getElementById("card-calendar-sheet"),
-    calendarSheetCells: document.getElementById("cal-sheet-cells"),
-    btnPrevMonth: document.createElement("button"),
-    btnNextMonth: document.createElement("button"),
-    btnToday: document.createElement("button")
-    // btnPrevMonth: document.getElementById("btn-prev-month"),
-    // btnNextMonth: document.getElementById("btn-next-month")
+    calendarSheetCells: document.getElementById("cal-sheet-cells")
 }
 
 const calendarCells = new Array(48).fill(1);
@@ -38,73 +33,6 @@ function initCalendar() {
     drawCalendarSheet(today);
     setupActionButtons();
     selectDay(today);
-}
-
-function selectDay(date) {
-    selectedDate = date;
-    loadHistoricEvents(date);
-    loadHolidays(date);
-    setHtmlElementsData(date);
-}
-
-function setCalendarSheetTitle(date) {
-    elements.cardCalendarSheet.cardTitle = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
-}
-
-function setupActionButtons() {
-    let buttons = document.createElement("div");
-    buttons.classList.add("card__button-group");
-    let btnPrevWithIcon = buildStyledButtonWithSvgIcon(ARROW_LEFT_PATH, "card__button", "card__button-icon");
-    let btnNextWithIcon = buildStyledButtonWithSvgIcon(ARROW_RIGHT_PATH, "card__button", "card__button-icon");
-    let btnTodayWithIcon = buildStyledButtonWithSvgIcon(TODAY_PATH, "card__button", "card__button-icon");
-
-    btnPrevWithIcon.onclick = function () {
-        let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() - 1, 1);
-        drawCalendarSheet(date);
-    }
-    btnNextWithIcon.onclick = function () {
-        let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() + 1, 1);
-        drawCalendarSheet(date);
-    }
-    btnTodayWithIcon.onclick = function () {
-        drawCalendarSheet(today);
-    }
-
-    buttons.append(btnPrevWithIcon, btnTodayWithIcon, btnNextWithIcon);
-    elements.cardCalendarSheet.setActionsContent(buttons);
-}
-
-function buildStyledButtonWithSvgIcon(svgPath, classButton, classIcon) {
-    let button = document.createElement("button");
-    button = addIconToElement(button, svgPath, classIcon);
-    button.classList.add(classButton);
-    return button;
-}
-
-// !!! only works with fontawesome icons with default settings
-function addIconToElement(el, svgPath, classIcon) {
-    const svgNamespace = "http://www.w3.org/2000/svg";
-    let icon = document.createElementNS(svgNamespace, "svg");
-    icon.classList.add(classIcon);
-    icon.setAttribute("height", "24px");
-    icon.setAttribute("width", "24px");
-    icon.setAttribute("viewBox", "0 -960 960 960");
-    let pathElement = document.createElementNS(svgNamespace, "path");
-    pathElement.setAttribute("d", svgPath);
-    icon.appendChild(pathElement);
-    el.appendChild(icon);
-    return el;
-}
-
-elements.btnNextMonth.onclick = function () {
-    console.log("next button clicked!");
-    let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() + 1, 1);
-    drawCalendarSheet(date);
-}
-elements.btnPrevMonth.onclick = function () {
-    console.log("previous button clicked!");
-    let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() - 1, 1);
-    drawCalendarSheet(date);
 }
 
 function drawCalendarSheet(date) {
@@ -206,6 +134,62 @@ function drawCalendarSheet(date) {
             totalCount++;
         }
     }
+}
+
+function selectDay(date) {
+    selectedDate = date;
+    loadHistoricEvents(date);
+    loadHolidays(date);
+    setHtmlElementsData(date);
+}
+
+function setupActionButtons() {
+    let buttons = document.createElement("div");
+    buttons.classList.add("card__button-group");
+    let btnPrevWithIcon = buildStyledButtonWithSvgIcon(ARROW_LEFT_PATH, "card__button", "card__button-icon");
+    let btnNextWithIcon = buildStyledButtonWithSvgIcon(ARROW_RIGHT_PATH, "card__button", "card__button-icon");
+    let btnTodayWithIcon = buildStyledButtonWithSvgIcon(TODAY_PATH, "card__button", "card__button-icon");
+
+    btnPrevWithIcon.onclick = function () {
+        let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() - 1, 1);
+        drawCalendarSheet(date);
+    }
+    btnNextWithIcon.onclick = function () {
+        let date = new Date(firstOfShownMonth.getFullYear(), firstOfShownMonth.getMonth() + 1, 1);
+        drawCalendarSheet(date);
+    }
+    btnTodayWithIcon.onclick = function () {
+        drawCalendarSheet(today);
+    }
+
+    buttons.append(btnPrevWithIcon, btnTodayWithIcon, btnNextWithIcon);
+    elements.cardCalendarSheet.setActionsContent(buttons);
+}
+
+function buildStyledButtonWithSvgIcon(svgPath, classButton, classIcon) {
+    let button = document.createElement("button");
+    button = addIconToElement(button, svgPath, classIcon);
+    button.classList.add(classButton);
+    return button;
+}
+
+// !!! only works with fontawesome icons with default settings
+function addIconToElement(el, svgPath, classIcon) {
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    let icon = document.createElementNS(svgNamespace, "svg");
+    icon.classList.add(classIcon);
+    icon.setAttribute("height", "24px");
+    icon.setAttribute("width", "24px");
+    icon.setAttribute("viewBox", "0 -960 960 960");
+    let pathElement = document.createElementNS(svgNamespace, "path");
+    pathElement.setAttribute("d", svgPath);
+    icon.appendChild(pathElement);
+    el.appendChild(icon);
+    return el;
+}
+
+function setCalendarSheetTitle(date) {
+    elements.cardCalendarSheet.cardTitle = date.toLocaleString('de-de', { month: 'long', year: 'numeric' });
 }
 
 function setBasicDataForSheet(date) {
